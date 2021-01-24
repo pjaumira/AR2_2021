@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Game>
+	<Level id="1" time="60" >
+		<characters>
+			<character mov="5" posi="0" posj="0" obji="4" objj="0" />
+			<character mov="4" posi="3" posj="0" obji="2" objj="1" />
+		</characters>
+		<Walls>
+			<Wall i="1" j="0"/>
+			<Wall i="1" j="1"/>
+			<Wall i="1" j="2"/>
+			<Wall i="2" j="0"/>
+			<Wall i="4" j="1"/>
+			<Wall i="4" j="3"/>		
+		</Walls>	
+	</Level>
+		<Level id="2" time="40" >
+		<characters>
+			<character mov="4" posi="4" posj="0" obji="0" objj="3" />
+			<character mov="3" posi="3" posj="0" obji="0" objj="0" />
+		</characters>
+		<Walls>
+			<Wall i="0" j="1"/>
+			<Wall i="1" j="3"/>
+			<Wall i="3" j="0"/>
+			<Wall i="4" j="2"/>
+		</Walls>	
+	</Level>
+</Game>
