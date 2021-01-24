@@ -5,4 +5,10 @@
 class Play:public Scene
 {
 
+
+public:
+	Play();
+
+	void Update(InputManager*);
+	void Draw();
 };

@@ -5,4 +5,10 @@
 class Menu: public Scene
 {
 
+
+public:
+	Menu();
+	
+	void Update(InputManager*);
+	void Draw();
 };
