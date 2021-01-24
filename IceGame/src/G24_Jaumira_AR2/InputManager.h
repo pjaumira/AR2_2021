@@ -1,6 +1,5 @@
 #pragma once
-<<<<<<< HEAD
-#include "Type.h"
+#include "Types.h"
 #include "SDL.h"
 
 class Inputs
@@ -19,10 +18,4 @@ public:
 	const Vec2* GetMousePosition()const { return &mousePosition; }
 	const bool* GetMouseClicked()const { return &click; }
 	const bool* GetExit()const { return &exit; }
-=======
-
-class InputManager
-{
-
->>>>>>> master
 };

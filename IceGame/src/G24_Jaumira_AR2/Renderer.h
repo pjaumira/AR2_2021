@@ -4,7 +4,7 @@
 #include <SDL_ttf.h>
 #include <string.h>
 #include <unordered_map>
-#include "Type.h"
+#include "Types.h"
 #include "Constants.h"
 
 //SDL

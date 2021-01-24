@@ -3,7 +3,7 @@
 #include <sstream>
 #include <iostream>
 #include <iomanip>
-#include "Type.h"
+#include "Types.h"
 
 
 inline std::string FloatToString(float _num, int _decimals)
@@ -41,4 +41,10 @@ namespace Collision
 
 		return sqrt(pow(ob2.x - ob1.x, 2)) < (o1.w + o2.w) * 0.5 && sqrt(pow(ob2.y - ob1.y, 2)) < (o1.h + o2.h) * 0.5;
 	};
+}
+
+inline void SecondsToMinutes(float _t, Time &t)
+{
+	t.sec = (int)_t % 60;
+	t.min = _t / 60;
 }

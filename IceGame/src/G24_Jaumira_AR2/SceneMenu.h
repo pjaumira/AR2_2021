@@ -1,5 +1,4 @@
 #pragma once
-#include "InputManager.h"
 #include "Scene.h"
 
 class Menu: public Scene
@@ -9,6 +8,6 @@ class Menu: public Scene
 public:
 	Menu();
 	
-	void Update(InputManager*);
+	void Update(Inputs*);
 	void Draw();
 };

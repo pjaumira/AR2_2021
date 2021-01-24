@@ -1,14 +1,20 @@
 #pragma once
-#include "InputManager.h"
 #include "Scene.h"
+#include "Player.h"
+#include "Map.h"
+#include "HUD.h"
+#include <vector>
 
 class Play:public Scene
 {
-
+	std::vector<Player> players;
+	Map map;
+	HUD hud;
 
 public:
-	Play();
+	Play() {}
+	Play(int);
 
-	void Update(InputManager*);
+	void Update(Inputs*);
 	void Draw();
 };

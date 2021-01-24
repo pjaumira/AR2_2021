@@ -1,19 +1,26 @@
 #pragma once
 #include "Renderer.h"
-#include "Type.h"
+#include "Types.h"
+#include "Utils.h"
+#include <time.h>
 
-class HUD {
-
-	float currentTime;
+class HUD
+{
+	float limitTime;
 	Time cTime;
-	int movesP1, movesP2;
+	clock_t lastTime;
+	int movesP1{ 0 }, movesP2{ 0 };
+
+	Vec2 movesP1Size, movesP2Size;
 
 public:
 	HUD() {}
-	HUD(int, int);
-	void Update(Time, int, int, int, int);
+	HUD(int);
+	
+	void UpdateCurrentTime();
+	void Update(int, int);
 
 	void Draw();
 
-	const float* GetCurrent_Time()const { return &currentTime; }
+	const float* GetTime()const { return &limitTime; }
 };

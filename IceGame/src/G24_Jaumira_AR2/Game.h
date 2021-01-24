@@ -10,7 +10,7 @@ class Game
 {
 	GameState state;
 	Scene* scene;
-	InputManager inputs;
+	Inputs inputs;
 
 public:
 	Game();
