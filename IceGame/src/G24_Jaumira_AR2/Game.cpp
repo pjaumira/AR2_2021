@@ -47,9 +47,10 @@ void Game::Run()
 			}
 			else if (*scene->GetState() == SceneState::GOTORANKING)
 			{
+				int i = *scene->GetTime();
 				state = GameState::RANKING;
 				delete scene;
-				scene = new Ranking();
+				scene = new Ranking(i);
 			}
 			else if (*scene->GetState() == SceneState::EXIT)
 			{
