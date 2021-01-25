@@ -3,7 +3,7 @@
 Game::Game()
 {
 	state = GameState::PLAY;
-	scene = new Play(2);
+	scene = new Play(1);
 }
 
 void Game::Run()
@@ -35,9 +35,18 @@ void Game::Run()
 			if (*scene->GetState() == SceneState::GOTOMENU)
 			{
 				/*
-				state = GameState::Menu;
+				state = GameState::MENU;
 				delete scene;
 				scene = new Menu();
+				*/
+				state = GameState::EXIT;
+			}
+			else if (*scene->GetState() == SceneState::GOTORANKING)
+			{
+				/*
+				state = GameState::RANKING;
+				delete scene;
+				scene = new Ranking();
 				*/
 				state = GameState::EXIT;
 			}

@@ -18,7 +18,7 @@ Player::Player(std::string _textureID, std::string texturePath, Vec2 pos, int re
 	mapPos = Vec2(std::trunc((position.x + (position.w / 2)) / SPRITE_RESOLUTION), std::trunc((position.y + (position.h / 2)) / SPRITE_RESOLUTION));
 
 	cellsMovedCounter = 0;
-	speed = 15;
+	speed = 5;
 	remainingMoves = remMoves;
 	isAtGoal = false;
 }
@@ -75,10 +75,9 @@ void Player::Update(Inputs* inputs, Map* map)
 	//Colisions
 	if (direction[(int)InputKeys::UP])
 	{
-		if (*map->GetCellFromPos(Vec2(mapPos.x, mapPos.y - 1)) != CellType::WALL)
+		if (!map->CalculateWallCollisions(mapPos, position, dir))
 		{
 			position.y -= speed;
-			mapPos = Vec2(std::trunc((position.x + (position.w / 2)) / SPRITE_RESOLUTION), std::trunc((position.y + (position.h / 2)) / SPRITE_RESOLUTION));
 			cellsMovedCounter++;
 		}
 		else
@@ -87,14 +86,25 @@ void Player::Update(Inputs* inputs, Map* map)
 				remainingMoves--;
 			direction[(int)InputKeys::UP] = false;
 			cellsMovedCounter = 0;
+
+			if (textureID == T_PLAYER_1)
+			{
+				if (*map->GetCellFromPos(mapPos) == CellType::GOAL_P1)
+					isAtGoal = true;
+			}
+			else if (textureID == T_PLAYER_2)
+			{
+				if (*map->GetCellFromPos(mapPos) == CellType::GOAL_P2)
+					isAtGoal = true;
+			}
 		}
+		mapPos = Vec2(std::trunc((position.x + (position.w / 2)) / SPRITE_RESOLUTION), std::trunc((position.y + (position.h / 2)) / SPRITE_RESOLUTION));
 	}
 	else if (direction[(int)InputKeys::DOWN])
 	{
-		if (*map->GetCellFromPos(Vec2(mapPos.x, mapPos.y + 1)) != CellType::WALL)
+		if (!map->CalculateWallCollisions(mapPos, position, dir))
 		{
 			position.y += speed;
-			mapPos = Vec2(std::trunc((position.x + (position.w / 2)) / SPRITE_RESOLUTION), std::trunc((position.y + (position.h / 2)) / SPRITE_RESOLUTION));
 			cellsMovedCounter++;
 		}
 		else
@@ -103,14 +113,25 @@ void Player::Update(Inputs* inputs, Map* map)
 				remainingMoves--;
 			direction[(int)InputKeys::DOWN] = false;
 			cellsMovedCounter = 0;
+
+			if (textureID == T_PLAYER_1)
+			{
+				if (*map->GetCellFromPos(mapPos) == CellType::GOAL_P1)
+					isAtGoal = true;
+			}
+			else if (textureID == T_PLAYER_2)
+			{
+				if (*map->GetCellFromPos(mapPos) == CellType::GOAL_P2)
+					isAtGoal = true;
+			}
 		}
+		mapPos = Vec2(std::trunc((position.x + (position.w / 2)) / SPRITE_RESOLUTION), std::trunc((position.y + (position.h / 2)) / SPRITE_RESOLUTION));
 	}
 	else if (direction[(int)InputKeys::LEFT])
 	{
-		if (*map->GetCellFromPos(Vec2(mapPos.x - 1, mapPos.y)) != CellType::WALL)
+		if (!map->CalculateWallCollisions(mapPos, position, dir))
 		{
 			position.x -= speed;
-			mapPos = Vec2(std::trunc((position.x + (position.w / 2)) / SPRITE_RESOLUTION), std::trunc((position.y + (position.h / 2)) / SPRITE_RESOLUTION));
 			cellsMovedCounter++;
 		}
 		else
@@ -119,14 +140,25 @@ void Player::Update(Inputs* inputs, Map* map)
 				remainingMoves--;
 			direction[(int)InputKeys::LEFT] = false;
 			cellsMovedCounter = 0;
+
+			if (textureID == T_PLAYER_1)
+			{
+				if (*map->GetCellFromPos(mapPos) == CellType::GOAL_P1)
+					isAtGoal = true;
+			}
+			else if (textureID == T_PLAYER_2)
+			{
+				if (*map->GetCellFromPos(mapPos) == CellType::GOAL_P2)
+					isAtGoal = true;
+			}
 		}
+		mapPos = Vec2(std::trunc((position.x + (position.w / 2)) / SPRITE_RESOLUTION), std::trunc((position.y + (position.h / 2)) / SPRITE_RESOLUTION));
 	}
 	else if (direction[(int)InputKeys::RIGHT])
 	{
-		if (*map->GetCellFromPos(Vec2(mapPos.x + 1, mapPos.y)) != CellType::WALL)
+		if (!map->CalculateWallCollisions(mapPos, position, dir))
 		{
 			position.x += speed;
-			mapPos = Vec2(std::trunc((position.x + (position.w / 2)) / SPRITE_RESOLUTION), std::trunc((position.y + (position.h / 2)) / SPRITE_RESOLUTION));
 			cellsMovedCounter++;
 		}
 		else
@@ -135,19 +167,22 @@ void Player::Update(Inputs* inputs, Map* map)
 				remainingMoves--;
 			direction[(int)InputKeys::RIGHT] = false;
 			cellsMovedCounter = 0;
+
+			if (textureID == T_PLAYER_1)
+			{
+				if (*map->GetCellFromPos(mapPos) == CellType::GOAL_P1)
+					isAtGoal = true;
+			}
+			else if (textureID == T_PLAYER_2)
+			{
+				if (*map->GetCellFromPos(mapPos) == CellType::GOAL_P2)
+					isAtGoal = true;
+			}
 		}
+		mapPos = Vec2(std::trunc((position.x + (position.w / 2)) / SPRITE_RESOLUTION), std::trunc((position.y + (position.h / 2)) / SPRITE_RESOLUTION));
 	}
 
-	if (textureID == T_PLAYER_1)
-	{
-		if (*map->GetCellFromPos(mapPos) == CellType::GOAL_P1)
-			isAtGoal = true;
-	}
-	else if (textureID == T_PLAYER_2)
-	{
-		if (*map->GetCellFromPos(mapPos) == CellType::GOAL_P2)
-			isAtGoal = true;
-	}
+	
 
 	
 

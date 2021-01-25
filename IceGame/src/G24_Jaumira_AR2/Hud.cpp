@@ -1,4 +1,5 @@
 #include "HUD.h"
+#include <math.h>
 
 HUD::HUD(int _limitTime)
 {
@@ -15,15 +16,15 @@ HUD::HUD(int _limitTime)
 
 void HUD::UpdateCurrentTime()
 {
-	float dt = (clock() - lastTime) / CLOCKS_PER_SEC;
+	float dt = clock() - lastTime;
 	lastTime = clock();
-	limitTime -= dt;
+	limitTime -= dt / CLOCKS_PER_SEC;
 }
 
 void HUD::Update(int mp1, int mP2)
 {
 	UpdateCurrentTime();
-	SecondsToMinutes(limitTime, cTime);			//Pasar de segons a format min:sec
+	//SecondsToMinutes(limitTime, cTime);			//Pasar de segons a format min:sec
 	
 	if (movesP1 != mp1)
 	{
@@ -51,9 +52,8 @@ void HUD::Draw()
 	//TIMER
 	Renderer::GetInstance()->LoadFont(Font(F_GAMEOVER, "../../res/ttf/game_over.ttf", 100));
 	
-	std::string tmp = FillDigits(cTime.sec, 2);
-	Color c(200, 200, 0, 255);
-	Vec2 size = Renderer::GetInstance()->LoadTextureText(F_GAMEOVER, Text(TIMER, tmp + " sec.", c));
+	std::string tmp = FillDigits(std::trunc(limitTime), 2);
+	Vec2 size = Renderer::GetInstance()->LoadTextureText(F_GAMEOVER, Text(TIMER, tmp + " sec.", Color(255, 255, 255, 255)));
 	Renderer::GetInstance()->LoadRect(TIMER, Rect(SCREEN_WIDTH / 2 + size.x / 3, 10, size));
 
 	Renderer::GetInstance()->PushImage(TIMER, TIMER);

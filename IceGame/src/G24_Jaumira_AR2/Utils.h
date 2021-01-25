@@ -39,7 +39,7 @@ namespace Collision
 		float tmp1 = sqrt(pow(ob2.x - ob1.x, 2) + pow(ob2.y - ob1.y, 2));
 		float tmp2 = sqrt(pow(o1.w / 2 + o2.w / 2, 2) + pow(o1.h / 2 + o2.h / 2, 2));
 
-		return sqrt(pow(ob2.x - ob1.x, 2)) < (o1.w + o2.w) * 0.5 && sqrt(pow(ob2.y - ob1.y, 2)) < (o1.h + o2.h) * 0.5;
+		return sqrt(pow(ob2.x - ob1.x, 2)) <= (o1.w + o2.w) * 0.5 && sqrt(pow(ob2.y - ob1.y, 2)) <= (o1.h + o2.h) * 0.5;
 	};
 }
 

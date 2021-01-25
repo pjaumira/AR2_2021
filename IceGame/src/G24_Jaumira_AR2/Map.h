@@ -2,6 +2,7 @@
 #include "Types.h"
 #include "Constants.h"
 #include "Renderer.h"
+#include "Utils.h"
 #include "../../dep/inc/xml/rapidxml.hpp"
 #include "../../dep/inc/xml/rapidxml_iterators.hpp"
 #include "../../dep/inc/xml/rapidxml_print.hpp"
@@ -30,6 +31,7 @@ public:
 	Map() {}
 	Map(int);
 
+	bool CalculateWallCollisions(Vec2, Rect, Direction);
 	void Draw();
 
 	const int* GetPlayerMoves(int id)const { return &playerInfo[id].moves; }

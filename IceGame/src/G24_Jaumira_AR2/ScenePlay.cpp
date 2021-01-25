@@ -20,12 +20,19 @@ void Play::Update(Inputs* inputs)
 		state = SceneState::EXIT;
 	if (state == SceneState::RUNNING)
 	{
-		for(Player p:players)
+		for(Player &p:players)
 		{
-			p.Update(inputs, &map);
+			if(!*p.AtGoal())
+				p.Update(inputs, &map);
 		}
 
+		
+
 		hud.Update(*players[0].GetRemainingMoves(), *players[1].GetRemainingMoves());
+		if (*players[0].AtGoal() && *players[1].AtGoal())
+			state = SceneState::GOTORANKING;
+		if(*hud.GetTime() <= 0.f)
+			state = SceneState::GOTORANKING;
 	}
 	
 }

@@ -2,8 +2,8 @@
 <Game>
 	<Level id="1" time="60" >
 		<characters>
-			<character mov="5" posi="0" posj="0" obji="4" objj="0" />
-			<character mov="4" posi="3" posj="0" obji="2" objj="1" />
+			<character mov="4" posi="0" posj="0" obji="4" objj="0" />
+			<character mov="2" posi="4" posj="2" obji="2" objj="1" />
 		</characters>
 		<Walls>
 			<Wall i="1" j="0"/>

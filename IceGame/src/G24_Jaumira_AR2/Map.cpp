@@ -120,6 +120,52 @@ Map::Map(int lvl)
 
 }
 
+bool Map::CalculateWallCollisions(Vec2 mapPos, Rect pos, Direction dir)
+{
+	Rect tmp(pos.x, pos.y, SPRITE_RESOLUTION, SPRITE_RESOLUTION);
+	if (dir == Direction::UP || dir == Direction::UP_STOP)
+	{
+		if (map[mapPos.x][mapPos.y - 1] == CellType::WALL)
+		{
+			if (Collision::ObjectCollision(tmp, Rect(mapPos.x * SPRITE_RESOLUTION, (mapPos.y - 1) * SPRITE_RESOLUTION, SPRITE_RESOLUTION, SPRITE_RESOLUTION)))
+			{
+				return true;
+			}
+		}
+	}
+	else if (dir == Direction::DOWN || dir == Direction::DOWN_STOP)
+	{
+		if (map[mapPos.x][mapPos.y + 1] == CellType::WALL)
+		{
+			if (Collision::ObjectCollision(tmp, Rect(mapPos.x * SPRITE_RESOLUTION, (mapPos.y + 1) * SPRITE_RESOLUTION, SPRITE_RESOLUTION, SPRITE_RESOLUTION)))
+			{
+				return true;
+			}
+		}
+	}
+	else if (dir == Direction::RIGHT || dir == Direction::RIGHT_STOP)
+	{
+		if (map[mapPos.x + 1][mapPos.y] == CellType::WALL)
+		{
+			if (Collision::ObjectCollision(tmp, Rect((mapPos.x + 1) * SPRITE_RESOLUTION, mapPos.y * SPRITE_RESOLUTION, SPRITE_RESOLUTION, SPRITE_RESOLUTION)))
+			{
+				return true;
+			}
+		}
+	}
+	else if (dir == Direction::LEFT || dir == Direction::LEFT_STOP)
+	{
+		if (map[mapPos.x - 1][mapPos.y] == CellType::WALL)
+		{
+			if (Collision::ObjectCollision(tmp, Rect((mapPos.x - 1) * SPRITE_RESOLUTION, mapPos.y * SPRITE_RESOLUTION, SPRITE_RESOLUTION, SPRITE_RESOLUTION)))
+			{
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
 void Map::Draw()
 {
 	for (int i = 0; i < width; i++)
