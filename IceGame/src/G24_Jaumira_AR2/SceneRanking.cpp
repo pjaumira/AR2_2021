@@ -65,7 +65,7 @@ void Ranking::Save(int score, std::string name) {
 	}
 
 	//SAVE IN F
-	std::ofstream fexit(BINARY_P, std::ios::out | std::ios::binary);
+	std::ofstream fexit (BINARY_P, std::ios::out | std::ios::binary);
 
 	//SAVE IN FB
 	size_t len;
@@ -135,7 +135,7 @@ void Ranking::Update(Inputs* inputs) {
 
 	if (nameInput) {
 
-		if (Renderer::GetInstance()->event.key.keysym.sym >= SDLK_a && Renderer::GetInstance()->event.key.keysym.sym <= SDLK_z && NameRecord.size() < 10 && !keypressedNames) {
+		if (Renderer::GetInstance()->event.key.keysym.sym >= SDLK_a && Renderer::GetInstance()->event.key.keysym.sym <= SDLK_z && NameRecord.size() < 5 && !keypressedNames) {
 			NameRecord.push_back(Renderer::GetInstance()->event.key.keysym.sym);//We add the pressed key
 			keypressedNames = true;
 			currentTime = 0;
@@ -145,13 +145,12 @@ void Ranking::Update(Inputs* inputs) {
 		currentTime++;
 		if (currentTime > 50) { keypressedNames = false; }
 
-		if (Inputs::Check()->backspace && !NameRecord.empty()) { //Delete last key enter
+		if (*inputs->GetKey(InputKeys::BACKSPACE) && !NameRecord.empty()) { //Delete last key enter
 			NameRecord.pop_back();
-			Inputs::Check()->backspace = false;
 		}
 
 		// tenca la introduccio de noms
-		if (Inputs::Check()->space) {
+		if (*inputs->GetKey(InputKeys::SPACEBAR)) {
 			if (NameRecord.size() > 0) {
 				name = "";
 				for (std::list<char>::iterator it = NameRecord.begin(); it != NameRecord.end(); ++it) {
@@ -161,7 +160,6 @@ void Ranking::Update(Inputs* inputs) {
 				Save(Score, name);
 				nameInput = false;
 
-				Inputs::Check()->space = false;
 
 				state = SceneState::GOTORANKING;
 				// Scene::StateScene = SceneState::GOTO;
@@ -173,7 +171,7 @@ void Ranking::Update(Inputs* inputs) {
 
 void Ranking::DrawRanking() {
 	int numberRecord = 1;//Number record
-	int distance = 35;//Distance of records
+	int distance = 20;//Distance of records
 	if (list.size() > 0) {
 		for (listofPair::iterator it = list.begin(); it != list.end(); ++it) {
 

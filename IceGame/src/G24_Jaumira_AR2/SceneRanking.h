@@ -4,6 +4,8 @@
 #include "DeltaTime.h"
 #include "Button.h"
 #include "Utils.h"
+#include <sstream>
+#include <fstream>
 
 typedef std::list<std::pair<std::string, int>> listofPair;
 

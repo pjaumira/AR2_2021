@@ -10,6 +10,7 @@ private:
 	bool click = false, exit = false;
 
 public:
+
 	~Inputs();
 	void SetKey(InputKeys, bool);
 	void Update(GameState);
