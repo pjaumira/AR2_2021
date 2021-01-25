@@ -54,7 +54,7 @@ struct Text
 	Text(std::string _id, std::string _text, Color _color) :id(_id), text(_text), color(_color) {};
 };
 
-enum class InputKeys{ UP, DOWN, RIGHT, LEFT, ESC, COUNT };
+enum class InputKeys{ UP, DOWN, RIGHT, LEFT, ESC, BACKSPACE, SPACEBAR, COUNT };
 
 enum class Direction { UP, DOWN, LEFT, RIGHT, UP_STOP, DOWN_STOP, LEFT_STOP, RIGHT_STOP, NONE };
 

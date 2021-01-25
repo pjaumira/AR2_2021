@@ -36,4 +36,6 @@ public:
 	 void PushRotatedSprite(const std::string &id, const std::string &idRectSprite, const std::string &idRectPos, float angle);
 	 void SetRenderDrawColor(int r, int g, int b);
 	 void SetRenderDrawColor(const Color &c);
+
+	 SDL_Event event;
 };
