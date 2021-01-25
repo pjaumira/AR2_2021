@@ -69,9 +69,6 @@
     <ClInclude Include="ScenePlay.h">
       <Filter>Archivos de encabezado\Modelo\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="ScenePlay2.h">
-      <Filter>Archivos de encabezado\Modelo\Scenes</Filter>
-    </ClInclude>
     <ClInclude Include="ReadXML.h">
       <Filter>Archivos de encabezado\Modelo\Scenes</Filter>
     </ClInclude>
@@ -89,6 +86,12 @@
     </ClInclude>
     <ClInclude Include="HUD.h">
       <Filter>Archivos de encabezado\Modelo\MapElements</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>Archivos de encabezado\Modelo\Extras</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -116,9 +119,6 @@
     <ClCompile Include="SceneRanking.cpp">
       <Filter>Archivos de recursos\Modelo\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="ScenePlay2.cpp">
-      <Filter>Archivos de recursos\Modelo\Scenes</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Archivos de recursos\Modelo\MapElements</Filter>
     </ClCompile>
@@ -127,6 +127,9 @@
     </ClCompile>
     <ClCompile Include="HUD.cpp">
       <Filter>Archivos de recursos\Modelo\MapElements</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

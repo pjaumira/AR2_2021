@@ -10,7 +10,6 @@ HUD::HUD(int _limitTime)
 
 	Renderer::GetInstance()->LoadFont(Font(F_GAMEOVER, "../../res/ttf/game_over.ttf", 60));
 
-	Renderer::GetInstance()->LoadTexture(T_BG, "../../res/img/Background_TopoBar.png");
 	Renderer::GetInstance()->LoadRect(T_BG, Rect(0, 0, SCREEN_WIDTH, 80));
 }
 

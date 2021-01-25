@@ -15,7 +15,6 @@ void Button::SetTextData(Vec2 _pos, std::string _fontPath, std::string _text, st
 
 void Button::ChangeState(Vec2 mouse)
 {
-	if (text.id == TITLE_TEXT) return;
 	// Hovers
 	if (Collision(mouse))
 	{
@@ -29,6 +28,8 @@ void Button::ChangeState(Vec2 mouse)
 			buttonState = text.id = BTTN_MENU_H;
 		else if (text.id == BTTN_EXIT)
 			buttonState = text.id = BTTN_EXIT_H;
+		else if (text.id == BTTN_BACK_R)
+			buttonState = text.id = BTTN_BACK_R_H;
 	}
 	// Normals
 	else
@@ -43,6 +44,8 @@ void Button::ChangeState(Vec2 mouse)
 			buttonState = text.id = BTTN_MENU;
 		else if (text.id == BTTN_EXIT_H)
 			buttonState = text.id = BTTN_EXIT;
+		else if (text.id == BTTN_BACK_R_H)
+			buttonState = text.id = BTTN_BACK_R;
 	}
 }
 

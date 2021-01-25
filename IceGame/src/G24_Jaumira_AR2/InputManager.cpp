@@ -20,6 +20,7 @@ void Inputs::Update(GameState _state)
 		switch (_state) {
 
 		case GameState::MENU:
+		case GameState::RANKING:
 			switch (events.type) {
 
 			case SDL_QUIT:

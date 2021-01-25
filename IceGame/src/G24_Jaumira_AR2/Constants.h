@@ -48,6 +48,7 @@ const std::string BTTN_MENU_H = "Menu_Button_Hover";
 const std::string BTTN_EXIT = "Exit_Button";
 const std::string BTTN_EXIT_H = "Exit_Button_Hover"; 
 const std::string BTTN_BACK_R = "Ranking_Button";
+const std::string BTTN_BACK_R_H = "Ranking_Button_Hover";
 
 // Text Ranking
 const std::string RANKING_INDEX = "Index_Ranking";

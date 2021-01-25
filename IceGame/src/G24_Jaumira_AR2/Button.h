@@ -18,4 +18,6 @@ public:
 	bool Collision(Vec2);
 
 	void Draw();
+
+	const Rect* GetRect()const { return &rect; }
 };

@@ -2,8 +2,8 @@
 
 Game::Game()
 {
-	state = GameState::PLAY;
-	scene = new Play(1);
+	state = GameState::MENU;
+	scene = new Menu();
 }
 
 void Game::Run()
@@ -26,6 +26,12 @@ void Game::Run()
 				delete scene;
 				scene = new Play(2);
 			}
+			else if (*scene->GetState() == SceneState::GOTORANKING)
+			{
+				state = GameState::RANKING;
+				delete scene;
+				scene = new Ranking();
+			}
 			else if (*scene->GetState() == SceneState::EXIT)
 			{
 				state = GameState::EXIT;
@@ -34,21 +40,16 @@ void Game::Run()
 		case GameState::PLAY:
 			if (*scene->GetState() == SceneState::GOTOMENU)
 			{
-				/*
 				state = GameState::MENU;
 				delete scene;
 				scene = new Menu();
-				*/
-				state = GameState::EXIT;
+				inputs.SetKey(InputKeys::ESC, false);
 			}
 			else if (*scene->GetState() == SceneState::GOTORANKING)
 			{
-				/*
 				state = GameState::RANKING;
 				delete scene;
 				scene = new Ranking();
-				*/
-				state = GameState::EXIT;
 			}
 			else if (*scene->GetState() == SceneState::EXIT)
 			{
@@ -56,6 +57,13 @@ void Game::Run()
 			}
 			break;
 		case GameState::RANKING:
+			if (*scene->GetState() == SceneState::GOTOMENU)
+			{
+				state = GameState::MENU;
+				delete scene;
+				scene = new Menu();
+				inputs.SetKey(InputKeys::ESC, false);
+			}
 			if (*scene->GetState() == SceneState::EXIT)
 			{
 				state = GameState::EXIT;
