@@ -1,9 +1,9 @@
 #include "SceneRanking.h"
 
 //Constructors
-Ranking::Ranking() 
-{
+Ranking::Ranking() {
 
+	// Carga BG
 	Renderer::GetInstance()->LoadRect(T_BG, Rect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT));
 
 	//Crear Textos pantalla Input
@@ -18,9 +18,9 @@ Ranking::Ranking()
 	Load();
 }
 
-Ranking::Ranking(int _score) 
-{
+Ranking::Ranking(int _score) {
 
+	// Carga BG
 	Renderer::GetInstance()->LoadRect(T_BG, Rect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT));
 
 	Renderer::GetInstance()->LoadTextureText(F_SAIYAN, Text( "txtInsert", "Insert Your Name",Color(255,255,255,229)));
@@ -35,15 +35,11 @@ Ranking::Ranking(int _score)
 }
 
 // Guardem les dades registrades al fitxer binari extern
-void Ranking::Save(int score, std::string name)
-{
+void Ranking::Save(int score, std::string name) {
 
 	Load();
 
-	if (list.empty()) 
-	{
-		list.push_front({ name, score });
-	}
+	if (list.empty()) { list.push_front({ name, score }); }
 
 	else 
 	{
