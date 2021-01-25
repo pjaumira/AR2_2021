@@ -4,20 +4,24 @@
 Ranking::Ranking() 
 {
 
+	Renderer::GetInstance()->LoadRect(T_BG, Rect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT));
+
 	//Crear Textos pantalla Input
 	Renderer::GetInstance()->LoadTextureText(F_SAIYAN, Text( "txtPlayers", "Top Players",Color( 255,255,255,229 ) )); //Text top Players
 	Renderer::GetInstance()->LoadTextureText(F_GAMEOVER, Text("txtInsert", "Insert Your Name",Color(255,255,255,229))); //Text insert your name
 	Renderer::GetInstance()->LoadTextureText(F_GAMEOVER, Text("spcSend", "Press Space To Send",Color(255,255,255,229) )); // Text send
 
 	//Button Back
-	returnMenu.SetTextData(Vec2(SCREEN_WIDTH / 2, 340), F_SAIYAN_P, "Go Back", F_SAIYAN, BTTN_BACK_R, Color(0, 150, 0, 255));
-	returnMenu.SetTextData(Vec2(SCREEN_WIDTH / 2, 340), F_SAIYAN_P, "Go Back", F_SAIYAN, BTTN_BACK_R_H, Color(255, 150, 0, 255));
+	returnMenu.SetTextData(Vec2(SCREEN_WIDTH / 2, 540), F_SAIYAN_P, "Go Back", F_SAIYAN, BTTN_BACK_R, Color(0, 150, 0, 255));
+	returnMenu.SetTextData(Vec2(SCREEN_WIDTH / 2, 540), F_SAIYAN_P, "Go Back", F_SAIYAN, BTTN_BACK_R_H, Color(255, 150, 0, 255));
 
 	Load();
 }
 
 Ranking::Ranking(int _score) 
 {
+
+	Renderer::GetInstance()->LoadRect(T_BG, Rect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT));
 
 	Renderer::GetInstance()->LoadTextureText(F_SAIYAN, Text( "txtInsert", "Insert Your Name",Color(255,255,255,229)));
 	Renderer::GetInstance()->LoadTextureText(F_GAMEOVER, Text( "spcSend", "Press Space To Send",Color(255,255,255,229) ));
@@ -85,8 +89,7 @@ void Ranking::Save(int score, std::string name)
 }
 
 // Carreguem les dades desde el fitxer extern a la pantalla
-void Ranking::Load() 
-{
+void Ranking::Load() {
 
 	//READ DOC
 	std::ifstream fentry(BINARY_P, std::ios::in | std::ios::binary);
@@ -194,24 +197,22 @@ void Ranking::Update(Inputs* inputs)
 void Ranking::DrawRanking() 
 {
 	int numberRecord = 1;//Number record
-	int distance = 20;//Distance of records
-	if (list.size() > 0) 
-	{
-		for (listofPair::iterator it = list.begin(); it != list.end(); ++it)
-		{
+	int distance = 67;//Distance of records
 
+	if (list.size() > 0) {
+		for (listofPair::iterator it = list.begin(); it != list.end(); ++it) {
 			//We load the name
 			Renderer::GetInstance()->LoadTextureText(F_GAMEOVER, Text( "scrRanking", it->first,Color( 250,102,0,0 )));
 
 			//We paint the name
-			Renderer::GetInstance()->LoadRect("scrRanking", Rect( SCREEN_WIDTH - 470,120 + numberRecord * distance,(Renderer::GetInstance()->GetTextureSize("scrRanking")).x, (Renderer::GetInstance()->GetTextureSize("scrRanking")).y ));
+			Renderer::GetInstance()->LoadRect("scrRanking", Rect( SCREEN_WIDTH - 315 ,70 + numberRecord * distance,(Renderer::GetInstance()->GetTextureSize("scrRanking")).x, (Renderer::GetInstance()->GetTextureSize("scrRanking")).y ));
 			Renderer::GetInstance()->PushImage("scrRanking", "scrRanking");
 
 			//We load the score
 			Renderer::GetInstance()->LoadTextureText(F_GAMEOVER , Text("scrRanking", std::to_string(it->second), Color(250, 102, 0, 0)));
 
 			//Paint the score
-			Renderer::GetInstance()->LoadRect("scrRanking", Rect(SCREEN_WIDTH - 320,120 + numberRecord * distance,(Renderer::GetInstance()->GetTextureSize("scrRanking")).x, (Renderer::GetInstance()->GetTextureSize("scrRanking")).y ));
+			Renderer::GetInstance()->LoadRect("scrRanking", Rect(SCREEN_WIDTH - 250,70 + numberRecord * distance,(Renderer::GetInstance()->GetTextureSize("scrRanking")).x, (Renderer::GetInstance()->GetTextureSize("scrRanking")).y ));
 			Renderer::GetInstance()->PushImage("scrRanking", "scrRanking");
 			numberRecord++;
 		}
@@ -244,7 +245,7 @@ void Ranking::Draw()
 		DrawRanking();
 
 		// Text Players
-		Renderer::GetInstance()->LoadRect("txtPlayers", Rect( 200,60,(Renderer::GetInstance()->GetTextureSize("txtPlayers")).x, (Renderer::GetInstance()->GetTextureSize("txtPlayers")).y ));
+		Renderer::GetInstance()->LoadRect("txtPlayers", Rect( SCREEN_WIDTH - 340,60,(Renderer::GetInstance()->GetTextureSize("txtPlayers")).x, (Renderer::GetInstance()->GetTextureSize("txtPlayers")).y ));
 		Renderer::GetInstance()->PushImage("txtPlayers", "txtPlayers");
 
 		returnMenu.Draw();
