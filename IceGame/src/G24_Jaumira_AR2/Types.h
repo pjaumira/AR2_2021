@@ -55,20 +55,17 @@ struct Text
 	Text(std::string _id, std::string _text, Color _color) :id(_id), text(_text), color(_color) {};
 };
 
-enum class InputKeys{ UP_P1, DOWN_P1, RIGHT_P1, LEFT_P1, UP_P2, DOWN_P2, RIGHT_P2, LEFT_P2, ESC, SPACE, RCTRL, COUNT };
+enum class InputKeys{ UP, DOWN, RIGHT, LEFT, ESC, COUNT };
 
 enum class Direction { UP, DOWN, LEFT, RIGHT, UP_STOP, DOWN_STOP, LEFT_STOP, RIGHT_STOP, NONE };
 
 enum class GameState { MENU, PLAY, RANKING, EXIT, COUNT };
 
-enum class SceneState {RUNNING, GAMEOVER, GOTOMENU, GOTOLEVEL1, GOTOLEVEL2, GOTORANKING, EXIT, COUNT};
+enum class SceneState {RUNNING, GAMEOVER, GOTOMENU, GOTOLEVEL1, GOTOLEVEL2, GOTORANKING,SCORE_INPUT, EXIT, COUNT};
 
-enum class CellType {PLAYER_1, PLAYER_2, GOAL_P1, GOAL_P2, ICE, WALL, COUNT};
+enum class CellType {PLAYER_1, PLAYER_2, WALL, GOAL1, GOAL2, LIMIT_WALL, ICE , COUNT};
 
-enum class BombState {EXPLODED, FINISHED, FADEOUT, COUNT};
-
-struct Time
-{
+struct Time {
 	int sec, min, h;
 	Time() {}
 	Time(int _s, int _m, int _h) :sec(_s), min(_m), h(_h) {}

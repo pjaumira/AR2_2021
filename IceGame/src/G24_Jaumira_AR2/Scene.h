@@ -1,13 +1,21 @@
 #pragma once
 #include "InputManager.h"
-#include "Renderer.h"
+#include <vector>
+#include "DeltaTime.h"
+#include "Player.h"
+#include "Board.h"
+#include "Button.h"
+#include "HUD.h"
+#include "Utils.h"
 
-class Scene
-{
+//Definicio classe Scene
+class Scene {
+
+public:
+
 	SceneState state;
 	int level;
 
-public:
 	virtual void Update(Inputs*) = 0;
 	virtual void Draw() = 0;
 

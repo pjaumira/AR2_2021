@@ -16,6 +16,7 @@ void Inputs::Update(GameState _state)
 	Vec2 temp;
 	SDL_Event events;
 	click = false;
+
 	while (SDL_PollEvent(&events)) {
 
 		switch (_state) {
@@ -66,19 +67,19 @@ void Inputs::Update(GameState _state)
 				switch (events.key.keysym.sym) {
 
 				case SDLK_w:
-					keyboard[(int)InputKeys::UP_P1] = true;
+					keyboard[(int)InputKeys::UP] = true;
 					break;
 
 				case SDLK_a:
-					keyboard[(int)InputKeys::LEFT_P1] = true;
+					keyboard[(int)InputKeys::LEFT] = true;
 					break;
 
 				case SDLK_s:
-					keyboard[(int)InputKeys::DOWN_P1] = true;
+					keyboard[(int)InputKeys::DOWN] = true;
 					break;
 
 				case SDLK_d:
-					keyboard[(int)InputKeys::RIGHT_P1] = true;
+					keyboard[(int)InputKeys::RIGHT] = true;
 					break;
 
 				}
@@ -92,24 +93,31 @@ void Inputs::Update(GameState _state)
 					break;
 
 				case SDLK_w:
-					keyboard[(int)InputKeys::UP_P1] = false;
+					keyboard[(int)InputKeys::UP] = false;
 					break;
 
 				case SDLK_a:
-					keyboard[(int)InputKeys::LEFT_P1] = false;
+					keyboard[(int)InputKeys::LEFT] = false;
 					break;
 
 				case SDLK_s:
-					keyboard[(int)InputKeys::DOWN_P1] = false;
+					keyboard[(int)InputKeys::DOWN] = false;
 					break;
 
 				case SDLK_d:
-					keyboard[(int)InputKeys::RIGHT_P1] = false;
+					keyboard[(int)InputKeys::RIGHT] = false;
 					break;
 				}
 				break;
 			}
 			break;
+
+		case GameState::RANKING:
+			switch (events.type) {
+			
+			default:
+				break;
+			}
 		}
 	}
 }
