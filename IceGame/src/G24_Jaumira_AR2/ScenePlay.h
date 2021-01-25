@@ -17,4 +17,6 @@ public:
 
 	void Update(Inputs*);
 	void Draw();
+
+	const float* GetTime()const { return hud.GetTime(); }
 };
