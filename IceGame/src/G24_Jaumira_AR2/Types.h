@@ -1,5 +1,4 @@
 #pragma once
-#include <time.h>
 #include <string>
 #include <stdint.h>
 
@@ -61,11 +60,14 @@ enum class Direction { UP, DOWN, LEFT, RIGHT, UP_STOP, DOWN_STOP, LEFT_STOP, RIG
 
 enum class GameState { MENU, PLAY, RANKING, EXIT, COUNT };
 
-enum class SceneState {RUNNING, GAMEOVER, GOTOMENU, GOTOLEVEL1, GOTOLEVEL2, GOTORANKING,SCORE_INPUT, EXIT, COUNT};
+enum class SceneState {RUNNING, GAMEOVER, GOTOMENU, GOTOLEVEL1, GOTOLEVEL2, GOTORANKING, EXIT, COUNT};
 
-enum class CellType {PLAYER_1, PLAYER_2, WALL, GOAL1, GOAL2, LIMIT_WALL, ICE , COUNT};
+enum class CellType {PLAYER_1, PLAYER_2, GOAL_P1, GOAL_P2, ICE, WALL, COUNT};
 
-struct Time {
+enum class BombState {EXPLODED, FINISHED, FADEOUT, COUNT};
+
+struct Time
+{
 	int sec, min, h;
 	Time() {}
 	Time(int _s, int _m, int _h) :sec(_s), min(_m), h(_h) {}

@@ -12,16 +12,17 @@ class Player
 	Rect position, rect;
 	std::string textureID;
 
-	Vec2 initPos, mapPos, initMapPos;
+	Vec2 mapPos;
 
-	int remainingMoves;
+	int remainingMoves, cellsMovedCounter;
+	float speed;
 
 	Direction dir;
 
-	bool isAtGoal;
+	bool isAtGoal, direction[4] = {false};
 
 public:
-
+	Player() {};
 	Player(std::string, std::string, Vec2, int);
 
 	void Update(Inputs*, Map*);
@@ -29,4 +30,6 @@ public:
 
 	const Vec2* GetPosition()const { return new Vec2(position.x, position.y); }
 	const std::string* GetID()const { return &textureID; }
+	const int* GetRemainingMoves()const { return &remainingMoves; }
+	const bool* AtGoal()const { return &isAtGoal; }
 };

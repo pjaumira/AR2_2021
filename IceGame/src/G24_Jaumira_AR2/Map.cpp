@@ -26,7 +26,7 @@ void Map::ReadXML(int lvl)
 
 	int i = 0;
 	//Players
-	for (rapidxml::xml_node<>* pNode = pRoot->first_node("Level"); pNode; pNode = pNode->next_sibling())
+	for (rapidxml::xml_node<>* pNode = pRoot->first_node("characters")->first_node(); pNode; pNode = pNode->next_sibling())
 	{
 		rapidxml::xml_attribute<>* pAttr = pNode->first_attribute();
 		//Moves
@@ -38,47 +38,65 @@ void Map::ReadXML(int lvl)
 		pAttr = pAttr->next_attribute();
 		s = pAttr->value();
 		int tmp = std::stoi(s);
-		pos.x = tmp;
+		pos.y = tmp + 1;
 
 		pAttr = pAttr->next_attribute();
 		s = pAttr->value();
 		tmp = std::stoi(s);
-		pos.y = tmp;
+		pos.x = tmp + 1;
 
 		playerInfo.push_back(PlayerData(pos, moves));
 
 		pAttr = pAttr->next_attribute();
 		s = pAttr->value();
-		int x = std::stoi(s);
+		int y = std::stoi(s);
 
 		pAttr = pAttr->next_attribute();
 		s = pAttr->value();
-		int y = std::stoi(s);
+		int x = std::stoi(s);
 		if (i == 0)
-			map[x][y] = CellType::GOAL_P1;
+			map[x + 1][y + 1] = CellType::GOAL_P1;
 		else if (i == 1)
-			map[x][y] = CellType::GOAL_P2;
+			map[x + 1][y + 1] = CellType::GOAL_P2;
+		i++;
 	}
 
 	//Mapa
-	for(rapidxml::xml_node<>* pNode = pRoot->first_node("Walls")->first_node("Wall"); pNode; pNode = pNode->next_sibling())
+	for(rapidxml::xml_node<>* pNode = pRoot->first_node("Walls")->first_node(); pNode; pNode = pNode->next_sibling())
 	{
-		rapidxml::xml_attribute<>* pAttr = pAttr->next_attribute();
-		s = pAttr->value();
-		int x = std::stoi(s);
-
-		pAttr = pAttr->next_attribute();
+		rapidxml::xml_attribute<>* pAttr = pNode->first_attribute();
 		s = pAttr->value();
 		int y = std::stoi(s);
 
-		map[x][y] = CellType::WALL;
+		pAttr = pAttr->next_attribute();
+		s = pAttr->value();
+		int x = std::stoi(s);
+
+		map[x + 1][y + 1] = CellType::WALL;
+	}
+
+	for (int i = 0; i < width; i++)
+	{
+		for (size_t j = 0; j < height; j++)
+		{
+			if (i == 0 || j == 0 || i == width - 1 || j == height - 1)
+				map[i][j] = CellType::WALL;
+		}
 	}
 }
 
 Map::Map(int lvl)
 {
-	height = 7; 
-	width = 6;
+	height = (SCREEN_HEIGHT - 80) / SPRITE_RESOLUTION; 
+	width = SCREEN_WIDTH / SPRITE_RESOLUTION;
+
+	map = new CellType*[width];
+
+	for (size_t i = 0; i < width; i++)
+	{
+		map[i] = new CellType[height];
+	}
+
 	for (int i = 0; i < width; i++)
 	{
 		for (int j = 0; j < height; j++)
@@ -108,7 +126,7 @@ void Map::Draw()
 	{
 		for (int j = 0; j < height; j++)
 		{
-			Renderer::GetInstance()->LoadRect(ACTUAL_MAP_T, Rect(i * 72, j * 72 + 80, textureSize));
+			Renderer::GetInstance()->LoadRect(ACTUAL_MAP_T, Rect(i * SPRITE_RESOLUTION, j * SPRITE_RESOLUTION + 80, SPRITE_RESOLUTION, SPRITE_RESOLUTION));
 			if (map[i][j] == CellType::ICE)
 				Renderer::GetInstance()->PushSprite(T_MAP, T_ICE, ACTUAL_MAP_T);
 			else if (map[i][j] == CellType::WALL)

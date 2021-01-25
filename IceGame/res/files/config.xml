@@ -17,7 +17,7 @@
 		<Level id="2" time="40" >
 		<characters>
 			<character mov="4" posi="4" posj="0" obji="0" objj="3" />
-			<character mov="3" posi="3" posj="0" obji="0" objj="0" />
+			<character mov="3" posi="4" posj="3" obji="0" objj="0" />
 		</characters>
 		<Walls>
 			<Wall i="0" j="1"/>

@@ -6,9 +6,9 @@
 
 class HUD
 {
-	float limitTime;
+	float limitTime = 0;
 	Time cTime;
-	clock_t lastTime;
+	clock_t lastTime = 0;
 	int movesP1{ 0 }, movesP2{ 0 };
 
 	Vec2 movesP1Size, movesP2Size;

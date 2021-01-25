@@ -6,8 +6,8 @@
 #include "SceneRanking.h"
 #include "Types.h"
 
-class Game {
-
+class Game
+{
 	GameState state;
 	Scene* scene;
 	Inputs inputs;

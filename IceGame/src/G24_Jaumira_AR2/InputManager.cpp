@@ -1,5 +1,4 @@
 #include "InputManager.h"
-#include "InputManager.h"
 
 Inputs::~Inputs()
 {
@@ -16,7 +15,6 @@ void Inputs::Update(GameState _state)
 	Vec2 temp;
 	SDL_Event events;
 	click = false;
-
 	while (SDL_PollEvent(&events)) {
 
 		switch (_state) {
@@ -111,13 +109,6 @@ void Inputs::Update(GameState _state)
 				break;
 			}
 			break;
-
-		case GameState::RANKING:
-			switch (events.type) {
-			
-			default:
-				break;
-			}
 		}
 	}
 }

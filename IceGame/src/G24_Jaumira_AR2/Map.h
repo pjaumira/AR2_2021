@@ -12,7 +12,7 @@
 class Map
 {
 	int width, height, lTime;
-	CellType map[6][7];
+	CellType** map;
 	Vec2 textureSize;
 
 	struct PlayerData {

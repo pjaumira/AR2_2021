@@ -87,6 +87,9 @@
     <ClInclude Include="Map.h">
       <Filter>Archivos de encabezado\Modelo\MapElements</Filter>
     </ClInclude>
+    <ClInclude Include="HUD.h">
+      <Filter>Archivos de encabezado\Modelo\MapElements</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Renderer.cpp">
@@ -120,6 +123,9 @@
       <Filter>Archivos de recursos\Modelo\MapElements</Filter>
     </ClCompile>
     <ClCompile Include="Map.cpp">
+      <Filter>Archivos de recursos\Modelo\MapElements</Filter>
+    </ClCompile>
+    <ClCompile Include="HUD.cpp">
       <Filter>Archivos de recursos\Modelo\MapElements</Filter>
     </ClCompile>
   </ItemGroup>
