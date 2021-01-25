@@ -5,6 +5,8 @@
 class Scene
 {
 protected:
+
+
 	SceneState state;
 	int level;
 
