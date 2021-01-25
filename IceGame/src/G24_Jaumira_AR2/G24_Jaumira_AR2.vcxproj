@@ -154,9 +154,9 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneMenu.h" />
     <ClInclude Include="ScenePlay.h" />
-    <ClInclude Include="ScenePlay2.h" />
     <ClInclude Include="SceneRanking.h" />
     <ClInclude Include="Types.h" />
+    <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp" />
@@ -169,7 +169,6 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneMenu.cpp" />
     <ClCompile Include="ScenePlay.cpp" />
-    <ClCompile Include="ScenePlay2.cpp" />
     <ClCompile Include="SceneRanking.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
