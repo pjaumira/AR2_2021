@@ -18,20 +18,20 @@ Menu::Menu() {
 	title.SetTextData(Vec2(SCREEN_WIDTH / 2, 110), F_SAIYAN_P, "ICE", F_SAIYAN_TITLE, TITLE_TEXT, Color(200, 200, 0, 255));
 
 	//Level 1
-	level1.SetTextData(Vec2(SCREEN_WIDTH / 2, title.GetRect()->y + title.GetRect()->h + 50), F_SAIYAN_P, "Level I", F_SAIYAN, BTTN_LVL_1_H, Color(200, 150, 0, 255));
+	level1.SetTextData(Vec2(SCREEN_WIDTH / 2, title.GetRect()->y + title.GetRect()->h + 50), F_SAIYAN_P, "Level I", F_SAIYAN, BTTN_LVL_1_H, Color(150, 150, 0, 255));
 	level1.SetTextData(Vec2(SCREEN_WIDTH / 2, title.GetRect()->y + title.GetRect()->h + 50), F_SAIYAN_P, "Level I", F_SAIYAN, BTTN_LVL_1, Color(0, 200, 0, 255));
 
 	//Level2
-	level2.SetTextData(Vec2(SCREEN_WIDTH / 2, level1.GetRect()->y + level1.GetRect()->h + 30), F_SAIYAN_P, "Level II", F_SAIYAN, BTTN_LVL_2_H, Color(200, 150, 0, 255));
+	level2.SetTextData(Vec2(SCREEN_WIDTH / 2, level1.GetRect()->y + level1.GetRect()->h + 30), F_SAIYAN_P, "Level II", F_SAIYAN, BTTN_LVL_2_H, Color(150, 150, 0, 255));
 	level2.SetTextData(Vec2(SCREEN_WIDTH / 2, level1.GetRect()->y + level1.GetRect()->h + 30), F_SAIYAN_P, "Level II", F_SAIYAN, BTTN_LVL_2, Color(0, 200, 0, 255));
 
 	//Ranking
-	ranking.SetTextData(Vec2(SCREEN_WIDTH / 2, level2.GetRect()->y + level2.GetRect()->h + 30), F_SAIYAN_P, "Ranking", F_SAIYAN, BTTN_RANKING_H, Color(200, 150, 0, 255));
+	ranking.SetTextData(Vec2(SCREEN_WIDTH / 2, level2.GetRect()->y + level2.GetRect()->h + 30), F_SAIYAN_P, "Ranking", F_SAIYAN, BTTN_RANKING_H, Color(150, 150, 0, 255));
 	ranking.SetTextData(Vec2(SCREEN_WIDTH / 2, level2.GetRect()->y + level2.GetRect()->h + 30), F_SAIYAN_P, "Ranking", F_SAIYAN, BTTN_RANKING, Color(0, 200, 0, 255));
 
 	//Exit
 	exit.SetTextData(Vec2(SCREEN_WIDTH / 2, ranking.GetRect()->y + ranking.GetRect()->h + 30), F_SAIYAN_P, "Exit", F_SAIYAN, BTTN_EXIT_H, Color(150, 0, 0, 255));
-	exit.SetTextData(Vec2(SCREEN_WIDTH / 2, ranking.GetRect()->y + ranking.GetRect()->h + 30), F_SAIYAN_P, "Exit", F_SAIYAN, BTTN_EXIT, Color(200, 0, 0, 255));
+	exit.SetTextData(Vec2(SCREEN_WIDTH / 2, ranking.GetRect()->y + ranking.GetRect()->h + 30), F_SAIYAN_P, "Exit", F_SAIYAN, BTTN_EXIT, Color(0, 0, 0, 255));
 
 #pragma endregion
 }

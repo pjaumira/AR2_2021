@@ -1,5 +1,4 @@
 #include "Renderer.h"
-#include "Renderer.h"
 
 //TODO quiero una referencia o ahora quiero un nombre ...
 //ERROR ....
@@ -11,7 +10,7 @@ Renderer::Renderer()
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) throw "No es pot inicialitzar SDL subsystems";
 
 	// --- WINDOW ---
-	m_window = SDL_CreateWindow("SDL...", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
+	m_window = SDL_CreateWindow("SDL...", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 	if (m_window == nullptr) throw "No es pot inicialitzar SDL_Window";
 
 	// --- RENDERER ---
@@ -27,13 +26,13 @@ Renderer::Renderer()
 
 	//TTF --- INIT ---
 	if (TTF_Init() != 0) throw"No es pot inicialitzar SDL_ttf";
-	
+
 };
 
 Renderer::~Renderer()
 {
-	for (auto &t : m_textureData) SDL_DestroyTexture(t.second), t.second = nullptr;
-	for (auto &f : m_fontData) TTF_CloseFont(f.second), f.second = nullptr;
+	for (auto& t : m_textureData) SDL_DestroyTexture(t.second), t.second = nullptr;
+	for (auto& f : m_fontData) TTF_CloseFont(f.second), f.second = nullptr;
 	for (auto& f : m_rects) { delete f.second; f.second = nullptr; };
 
 	SDL_DestroyRenderer(m_renderer);
@@ -58,8 +57,8 @@ void Renderer::Clear() { SDL_RenderClear(m_renderer); };
 
 void Renderer::Render() { SDL_RenderPresent(m_renderer); };
 
-void Renderer::LoadFont(const Font &font) {
-	TTF_Font *ttfFont{ TTF_OpenFont(font.path.c_str(), font.size) };
+void Renderer::LoadFont(const Font& font) {
+	TTF_Font* ttfFont{ TTF_OpenFont(font.path.c_str(), font.size) };
 	if (ttfFont == nullptr) throw"No espot inicialitzar TTF_Font";
 	if (m_fontData.find(font.id) != m_fontData.end())
 	{
@@ -69,8 +68,8 @@ void Renderer::LoadFont(const Font &font) {
 	m_fontData[font.id] = ttfFont;
 };
 
-void Renderer::LoadTexture(const std::string &id, const std::string &path) {
-	SDL_Texture *texture{ IMG_LoadTexture(m_renderer, path.c_str()) };
+void Renderer::LoadTexture(const std::string& id, const std::string& path) {
+	SDL_Texture* texture{ IMG_LoadTexture(m_renderer, path.c_str()) };
 	if (texture == nullptr) throw "No s'han pogut crear les textures";
 	if (m_textureData.find(id) != m_textureData.end())
 	{
@@ -80,8 +79,8 @@ void Renderer::LoadTexture(const std::string &id, const std::string &path) {
 	m_textureData[id] = texture;
 };
 
-Vec2 Renderer::LoadTextureText(const std::string &fontId, Text text) {
-	SDL_Surface	*tmpSurf = TTF_RenderText_Blended(m_fontData[fontId], text.text.c_str(), SDL_Color{ text.color.r, text.color.g, text.color.b,text.color.a });
+Vec2 Renderer::LoadTextureText(const std::string& fontId, Text text) {
+	SDL_Surface* tmpSurf = TTF_RenderText_Blended(m_fontData[fontId], text.text.c_str(), SDL_Color{ text.color.r, text.color.g, text.color.b,text.color.a });
 	if (tmpSurf == nullptr) throw "Unable to create the SDL text surface";
 	Vec2 tmp(tmpSurf->w, tmpSurf->h);
 	if (m_textureData.find(text.id) != m_textureData.end())
@@ -94,7 +93,7 @@ Vec2 Renderer::LoadTextureText(const std::string &fontId, Text text) {
 	return { tmp.x,tmp.y };
 };
 
-void Renderer::LoadRect(const std::string& idRect, const Rect &rect) {
+void Renderer::LoadRect(const std::string& idRect, const Rect& rect) {
 	if (m_rects.find(idRect) != m_rects.end())
 	{
 		//std::unordered_map<std::string, SDL_Rect*>::iterator it = m_rects.find(idRect);
@@ -104,23 +103,23 @@ void Renderer::LoadRect(const std::string& idRect, const Rect &rect) {
 	m_rects[idRect] = new SDL_Rect{ rect.x,rect.y,rect.w,rect.h };
 };
 
-Vec2 Renderer::GetTextureSize(const std::string &id) {
+Vec2 Renderer::GetTextureSize(const std::string& id) {
 	int w; int h;
-	SDL_QueryTexture(m_textureData[id], NULL, NULL,&w, &h);
-	return {w, h};
+	SDL_QueryTexture(m_textureData[id], NULL, NULL, &w, &h);
+	return { w, h };
 };
 
 //Enseñarle a Aniol
-void Renderer::PushImage(const std::string &id, const std::string &idRect) {
+void Renderer::PushImage(const std::string& id, const std::string& idRect) {
 	SDL_RenderCopy(m_renderer, m_textureData[id], nullptr, m_rects[idRect]);
 };
 
-void Renderer::PushSprite(const std::string &id, const  std::string &idRectSprite,const  std::string &idRectPos) {
+void Renderer::PushSprite(const std::string& id, const  std::string& idRectSprite, const  std::string& idRectPos) {
 
-	SDL_RenderCopy(m_renderer, m_textureData[id],m_rects[idRectSprite], m_rects[idRectPos]);
+	SDL_RenderCopy(m_renderer, m_textureData[id], m_rects[idRectSprite], m_rects[idRectPos]);
 }
 
-void Renderer::PushRotatedSprite(const std::string & id, const std::string& idRectSprite, const std::string& idRectPos ,float angle){
+void Renderer::PushRotatedSprite(const std::string& id, const std::string& idRectSprite, const std::string& idRectPos, float angle) {
 	SDL_Point center = { m_rects[idRectPos]->w / 2, m_rects[idRectPos]->h / 2 };
 	SDL_RenderCopyEx(m_renderer, m_textureData[id], m_rects[idRectSprite], m_rects[idRectPos], angle, &center, SDL_FLIP_NONE);
 }
@@ -130,7 +129,7 @@ void Renderer::SetRenderDrawColor(int r, int g, int b)
 	SDL_SetRenderDrawColor(m_renderer, r, g, b, 255);
 }
 
-void Renderer::SetRenderDrawColor(const Color &c)
+void Renderer::SetRenderDrawColor(const Color& c)
 {
 	SDL_SetRenderDrawColor(m_renderer, c.r, c.g, c.b, 255);
 }

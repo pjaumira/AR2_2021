@@ -22,16 +22,16 @@ void Play::Update(Inputs* inputs)
 	{
 		for(Player &p:players)
 		{
-			if(!*p.AtGoal())
+			if(!*p.AtGoal() && *p.GetRemainingMoves() > 0)
 				p.Update(inputs, &map);
 		}
 
 		
 
 		hud.Update(*players[0].GetRemainingMoves(), *players[1].GetRemainingMoves());
+		if (*hud.GetTime() <= 0.f || *players[0].GetRemainingMoves() <= 0 && *players[1].GetRemainingMoves() <= 0)
+			state = SceneState::GOTOMENU;
 		if (*players[0].AtGoal() && *players[1].AtGoal())
-			state = SceneState::GOTORANKING;
-		if(*hud.GetTime() <= 0.f)
 			state = SceneState::GOTORANKING;
 	}
 	

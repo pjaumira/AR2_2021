@@ -278,10 +278,10 @@ enum
 
 typedef struct SDL_Color
 {
-    int r;
-	int g;
-	int b;
-	int a;
+    Uint8 r;
+    Uint8 g;
+    Uint8 b;
+    Uint8 a;
 } SDL_Color;
 #define SDL_Colour SDL_Color
 
