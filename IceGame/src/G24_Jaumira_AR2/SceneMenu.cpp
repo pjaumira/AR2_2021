@@ -12,7 +12,7 @@ Menu::Menu() {
 
 	Renderer::GetInstance()->LoadFont(Font(F_SAIYAN_TITLE, F_SAIYAN_P, 100));
 	Renderer::GetInstance()->LoadFont(Font(F_SAIYAN, F_SAIYAN_P, 60));
-	Renderer::GetInstance()->LoadFont(Font(F_GAMEOVER, F_SAIYAN_P, 80));
+	Renderer::GetInstance()->LoadFont(Font(F_GAMEOVER, F_GAMEOVER_P, 80));
 
 	//Title
 	title.SetTextData(Vec2(SCREEN_WIDTH / 2, 110), F_SAIYAN_P, "ICE", F_SAIYAN_TITLE, TITLE_TEXT, Color(0, 255, 255, 255));

@@ -98,7 +98,7 @@ void Ranking::Load() {
 
 	for (int i = 0; i < 5; i++)
 	{
-		list.push_front({ "Name",-1 });
+		list.push_front({ "-",-1 });
 	}
 
 	fentry.seekg(0, std::ios::end); //Put the cursor at end
@@ -205,7 +205,10 @@ void Ranking::DrawRanking()
 			Renderer::GetInstance()->PushImage("scrRanking", "scrRanking");
 
 			//We load the score
-			Renderer::GetInstance()->LoadTextureText(F_GAMEOVER , Text("scrRanking", std::to_string(it->second), Color(250, 102, 0, 0)));
+			if(it->second > 0)
+				Renderer::GetInstance()->LoadTextureText(F_GAMEOVER , Text("scrRanking", std::to_string(it->second), Color(250, 102, 0, 0)));
+			else
+				Renderer::GetInstance()->LoadTextureText(F_GAMEOVER, Text("scrRanking", "-", Color(250, 102, 0, 0)));
 
 			//Paint the score
 			Renderer::GetInstance()->LoadRect("scrRanking", Rect(SCREEN_WIDTH - 250,70 + numberRecord * distance,(Renderer::GetInstance()->GetTextureSize("scrRanking")).x, (Renderer::GetInstance()->GetTextureSize("scrRanking")).y ));
