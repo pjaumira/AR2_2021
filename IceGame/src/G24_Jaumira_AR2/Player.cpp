@@ -18,14 +18,15 @@ Player::Player(std::string _textureID, std::string texturePath, Vec2 pos, int re
 	mapPos = Vec2(std::trunc((position.x + (position.w / 2)) / SPRITE_RESOLUTION), std::trunc((position.y + (position.h / 2)) / SPRITE_RESOLUTION));
 
 	cellsMovedCounter = 0;
-	speed = 5;
+	speed = 5.f;
+	animationTime = 0.2f;
 	remainingMoves = remMoves;
 	isAtGoal = false;
 }
 
-void Player::Update(Inputs* inputs, Map* map)
+void Player::Update(Inputs* inputs, Map* map, float dt)
 {
-
+	animationTime -= dt;
 	switch (dir)
 	{
 	case Direction::UP:
@@ -185,49 +186,53 @@ void Player::Update(Inputs* inputs, Map* map)
 	
 
 	
-
-	switch (dir)
+	if (animationTime <= 0)
 	{
-	case Direction::UP:
-		rect.x += rect.w;
-		rect.y = 0;
-		break;
-	case Direction::DOWN:
-		rect.x += rect.w;
-		rect.y = rect.h * 2;
-		break;
-	case Direction::LEFT:
-		rect.x += rect.w;
-		rect.y = rect.h;
-		break;
-	case Direction::RIGHT:
-		rect.x += rect.w;
-		rect.y = rect.h * 3;
-		break;
-	case Direction::UP_STOP:
-		rect.x = rect.w;
-		rect.y = 0;
-		break;
-	case Direction::DOWN_STOP:
-		rect.x = rect.w;
-		rect.y = rect.h * 2;
-		break;
-	case Direction::LEFT_STOP:
-		rect.x = 0;
-		rect.y = rect.h;
-		break;
-	case Direction::RIGHT_STOP:
-		rect.x = 0;
-		rect.y = rect.h * 3;
-		break;
+		switch (dir)
+		{
+		case Direction::UP:
+			rect.x += rect.w;
+			rect.y = 0;
+			break;
+		case Direction::DOWN:
+			rect.x += rect.w;
+			rect.y = rect.h * 2;
+			break;
+		case Direction::LEFT:
+			rect.x += rect.w;
+			rect.y = rect.h;
+			break;
+		case Direction::RIGHT:
+			rect.x += rect.w;
+			rect.y = rect.h * 3;
+			break;
+		case Direction::UP_STOP:
+			rect.x = rect.w;
+			rect.y = 0;
+			break;
+		case Direction::DOWN_STOP:
+			rect.x = rect.w;
+			rect.y = rect.h * 2;
+			break;
+		case Direction::LEFT_STOP:
+			rect.x = 0;
+			rect.y = rect.h;
+			break;
+		case Direction::RIGHT_STOP:
+			rect.x = 0;
+			rect.y = rect.h * 3;
+			break;
+		}
+		if (rect.x >= rect.w * 3)
+			rect.x = 0;
+
+		animationTime = 0.2f;
 	}
-	if (rect.x >= rect.w * 3)
-		rect.x = 0;
 }
 
 void Player::Draw()
 {
-	Rect pos = Rect(position.x, position.y + 80, position.w, position.h);
+	Rect pos = Rect(position.x + (SPRITE_RESOLUTION - position.w) / 2, position.y + 80 + (SPRITE_RESOLUTION - position.h) / 2, position.w, position.h);
 	if (textureID == T_PLAYER_1)
 	{
 		Renderer::GetInstance()->LoadRect(T_PLAYER_1, pos);

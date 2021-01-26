@@ -3,7 +3,6 @@
 
 HUD::HUD(int _limitTime)
 {
-	lastTime = clock();
 	limitTime = _limitTime;
 
 	movesP1 = movesP2 = -1;
@@ -12,19 +11,10 @@ HUD::HUD(int _limitTime)
 
 	Renderer::GetInstance()->LoadRect(T_BG, Rect(0, 0, SCREEN_WIDTH, 80));
 }
-
-void HUD::UpdateCurrentTime()
+void HUD::Update(int mp1, int mP2, float dt)
 {
-	float dt = clock() - lastTime;
-	lastTime = clock();
-	limitTime -= dt / CLOCKS_PER_SEC;
-}
+	limitTime -= dt;
 
-void HUD::Update(int mp1, int mP2)
-{
-	UpdateCurrentTime();
-	//SecondsToMinutes(limitTime, cTime);			//Pasar de segons a format min:sec
-	
 	if (movesP1 != mp1)
 	{
 		movesP1 = mp1;

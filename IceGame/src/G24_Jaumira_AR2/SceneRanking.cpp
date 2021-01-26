@@ -7,13 +7,13 @@ Ranking::Ranking() {
 	Renderer::GetInstance()->LoadRect(T_BG, Rect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT));
 
 	//Crear Textos pantalla Input
-	Renderer::GetInstance()->LoadTextureText(F_SAIYAN, Text( "txtPlayers", "Top Players",Color( 255,255,255,229 ) )); //Text top Players
-	Renderer::GetInstance()->LoadTextureText(F_GAMEOVER, Text("txtInsert", "Insert Your Name",Color(255,255,255,229))); //Text insert your name
-	Renderer::GetInstance()->LoadTextureText(F_GAMEOVER, Text("spcSend", "Press Space To Send",Color(255,255,255,229) )); // Text send
+	Renderer::GetInstance()->LoadTextureText(F_SAIYAN, Text( "txtPlayers", "Top Players",Color( 0,255,255,229 ) )); //Text top Players
+	//Renderer::GetInstance()->LoadTextureText(F_GAMEOVER, Text("txtInsert", "Insert Your Name",Color(255,255,255,229))); //Text insert your name
+	//Renderer::GetInstance()->LoadTextureText(F_GAMEOVER, Text("spcSend", "Press Space To Send",Color(255,255,255,229) )); // Text send
 
 	//Button Back
-	returnMenu.SetTextData(Vec2(SCREEN_WIDTH / 2, 540), F_SAIYAN_P, "Go Back", F_SAIYAN, BTTN_BACK_R, Color(0, 150, 0, 255));
-	returnMenu.SetTextData(Vec2(SCREEN_WIDTH / 2, 540), F_SAIYAN_P, "Go Back", F_SAIYAN, BTTN_BACK_R_H, Color(255, 150, 0, 255));
+	returnMenu.SetTextData(Vec2(SCREEN_WIDTH / 2, 540), F_SAIYAN_P, "Go Back", F_SAIYAN, BTTN_BACK_R, Color(255, 255, 255, 255));
+	returnMenu.SetTextData(Vec2(SCREEN_WIDTH / 2, 540), F_SAIYAN_P, "Go Back", F_SAIYAN, BTTN_BACK_R_H, Color(0, 200, 0, 255));
 
 	Load();
 }

@@ -5,7 +5,6 @@
 #include "Renderer.h"
 #include "Map.h"
 #include <string>
-#include <time.h>
 
 class Player
 {
@@ -15,7 +14,7 @@ class Player
 	Vec2 mapPos;
 
 	int remainingMoves, cellsMovedCounter;
-	float speed;
+	float speed, animationTime;
 
 	Direction dir;
 
@@ -25,7 +24,7 @@ public:
 	Player() {};
 	Player(std::string, std::string, Vec2, int);
 
-	void Update(Inputs*, Map*);
+	void Update(Inputs*, Map*, float);
 	void Draw();
 
 	const Vec2* GetPosition()const { return new Vec2(position.x, position.y); }
