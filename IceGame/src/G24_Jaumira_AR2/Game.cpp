@@ -50,7 +50,7 @@ void Game::Run()
 				int i = *scene->GetTime();
 				state = GameState::RANKING;
 				delete scene;
-				scene = new Ranking(i);
+				scene = new Ranking(i, &inputs);
 			}
 			else if (*scene->GetState() == SceneState::EXIT)
 			{

@@ -15,7 +15,7 @@ class Ranking : public Scene {
 public:
 
 	Ranking();
-	Ranking(int _score);
+	Ranking(int _score, Inputs*);
 	~Ranking();
 
 	bool nameInput = false;

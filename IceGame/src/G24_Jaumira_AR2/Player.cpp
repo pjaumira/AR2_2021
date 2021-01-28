@@ -76,108 +76,137 @@ void Player::Update(Inputs* inputs, Map* map, float dt)
 	//Colisions
 	if (direction[(int)InputKeys::UP])
 	{
-		if (!map->CalculateWallCollisions(mapPos, position, dir))
+		if (cellsMovedCounter == 0 && *map->GetCellFromPos(Vec2(mapPos.x, mapPos.y - 1)) == CellType::WALL)
 		{
-			position.y -= speed;
-			cellsMovedCounter++;
+			direction[(int)InputKeys::UP] = false;
 		}
 		else
 		{
-			if (cellsMovedCounter != 0)
-				remainingMoves--;
-			direction[(int)InputKeys::UP] = false;
-			cellsMovedCounter = 0;
-
-			if (textureID == T_PLAYER_1)
+			if (!map->CalculateWallCollisions(mapPos, position, dir))
 			{
-				if (*map->GetCellFromPos(mapPos) == CellType::GOAL_P1)
-					isAtGoal = true;
+				position.y -= speed;
+				cellsMovedCounter++;
 			}
-			else if (textureID == T_PLAYER_2)
+			else
 			{
-				if (*map->GetCellFromPos(mapPos) == CellType::GOAL_P2)
-					isAtGoal = true;
+				if (cellsMovedCounter != 0)
+					remainingMoves--;
+				direction[(int)InputKeys::UP] = false;
+				cellsMovedCounter = 0;
+
+				if (textureID == T_PLAYER_1)
+				{
+					if (*map->GetCellFromPos(mapPos) == CellType::GOAL_P1)
+						isAtGoal = true;
+				}
+				else if (textureID == T_PLAYER_2)
+				{
+					if (*map->GetCellFromPos(mapPos) == CellType::GOAL_P2)
+						isAtGoal = true;
+				}
 			}
 		}
+		
 		mapPos = Vec2(std::trunc((position.x + (position.w / 2)) / SPRITE_RESOLUTION), std::trunc((position.y + (position.h / 2)) / SPRITE_RESOLUTION));
 	}
 	else if (direction[(int)InputKeys::DOWN])
 	{
-		if (!map->CalculateWallCollisions(mapPos, position, dir))
+		if (cellsMovedCounter == 0 && *map->GetCellFromPos(Vec2(mapPos.x, mapPos.y + 1)) == CellType::WALL)
 		{
-			position.y += speed;
-			cellsMovedCounter++;
+			direction[(int)InputKeys::DOWN] = false;
 		}
 		else
 		{
-			if (cellsMovedCounter != 0)
-				remainingMoves--;
-			direction[(int)InputKeys::DOWN] = false;
-			cellsMovedCounter = 0;
-
-			if (textureID == T_PLAYER_1)
+			if (!map->CalculateWallCollisions(mapPos, position, dir))
 			{
-				if (*map->GetCellFromPos(mapPos) == CellType::GOAL_P1)
-					isAtGoal = true;
+				position.y += speed;
+				cellsMovedCounter++;
 			}
-			else if (textureID == T_PLAYER_2)
+			else
 			{
-				if (*map->GetCellFromPos(mapPos) == CellType::GOAL_P2)
-					isAtGoal = true;
+				if (cellsMovedCounter != 0)
+					remainingMoves--;
+				direction[(int)InputKeys::DOWN] = false;
+				cellsMovedCounter = 0;
+
+				if (textureID == T_PLAYER_1)
+				{
+					if (*map->GetCellFromPos(mapPos) == CellType::GOAL_P1)
+						isAtGoal = true;
+				}
+				else if (textureID == T_PLAYER_2)
+				{
+					if (*map->GetCellFromPos(mapPos) == CellType::GOAL_P2)
+						isAtGoal = true;
+				}
 			}
 		}
 		mapPos = Vec2(std::trunc((position.x + (position.w / 2)) / SPRITE_RESOLUTION), std::trunc((position.y + (position.h / 2)) / SPRITE_RESOLUTION));
 	}
 	else if (direction[(int)InputKeys::LEFT])
 	{
-		if (!map->CalculateWallCollisions(mapPos, position, dir))
+		if (cellsMovedCounter == 0 && *map->GetCellFromPos(Vec2(mapPos.x - 1, mapPos.y)) == CellType::WALL)
 		{
-			position.x -= speed;
-			cellsMovedCounter++;
+			direction[(int)InputKeys::LEFT] = false;
 		}
 		else
 		{
-			if (cellsMovedCounter != 0)
-				remainingMoves--;
-			direction[(int)InputKeys::LEFT] = false;
-			cellsMovedCounter = 0;
-
-			if (textureID == T_PLAYER_1)
+			if (!map->CalculateWallCollisions(mapPos, position, dir))
 			{
-				if (*map->GetCellFromPos(mapPos) == CellType::GOAL_P1)
-					isAtGoal = true;
+				position.x -= speed;
+				cellsMovedCounter++;
 			}
-			else if (textureID == T_PLAYER_2)
+			else
 			{
-				if (*map->GetCellFromPos(mapPos) == CellType::GOAL_P2)
-					isAtGoal = true;
+				if (cellsMovedCounter != 0)
+					remainingMoves--;
+				direction[(int)InputKeys::LEFT] = false;
+				cellsMovedCounter = 0;
+
+				if (textureID == T_PLAYER_1)
+				{
+					if (*map->GetCellFromPos(mapPos) == CellType::GOAL_P1)
+						isAtGoal = true;
+				}
+				else if (textureID == T_PLAYER_2)
+				{
+					if (*map->GetCellFromPos(mapPos) == CellType::GOAL_P2)
+						isAtGoal = true;
+				}
 			}
 		}
 		mapPos = Vec2(std::trunc((position.x + (position.w / 2)) / SPRITE_RESOLUTION), std::trunc((position.y + (position.h / 2)) / SPRITE_RESOLUTION));
 	}
 	else if (direction[(int)InputKeys::RIGHT])
 	{
-		if (!map->CalculateWallCollisions(mapPos, position, dir))
+		if (cellsMovedCounter == 0 && *map->GetCellFromPos(Vec2(mapPos.x + 1, mapPos.y)) == CellType::WALL)
 		{
-			position.x += speed;
-			cellsMovedCounter++;
+			direction[(int)InputKeys::RIGHT] = false;
 		}
 		else
 		{
-			if (cellsMovedCounter != 0)
-				remainingMoves--;
-			direction[(int)InputKeys::RIGHT] = false;
-			cellsMovedCounter = 0;
-
-			if (textureID == T_PLAYER_1)
+			if (!map->CalculateWallCollisions(mapPos, position, dir))
 			{
-				if (*map->GetCellFromPos(mapPos) == CellType::GOAL_P1)
-					isAtGoal = true;
+				position.x += speed;
+				cellsMovedCounter++;
 			}
-			else if (textureID == T_PLAYER_2)
+			else
 			{
-				if (*map->GetCellFromPos(mapPos) == CellType::GOAL_P2)
-					isAtGoal = true;
+				if (cellsMovedCounter != 0)
+					remainingMoves--;
+				direction[(int)InputKeys::RIGHT] = false;
+				cellsMovedCounter = 0;
+
+				if (textureID == T_PLAYER_1)
+				{
+					if (*map->GetCellFromPos(mapPos) == CellType::GOAL_P1)
+						isAtGoal = true;
+				}
+				else if (textureID == T_PLAYER_2)
+				{
+					if (*map->GetCellFromPos(mapPos) == CellType::GOAL_P2)
+						isAtGoal = true;
+				}
 			}
 		}
 		mapPos = Vec2(std::trunc((position.x + (position.w / 2)) / SPRITE_RESOLUTION), std::trunc((position.y + (position.h / 2)) / SPRITE_RESOLUTION));

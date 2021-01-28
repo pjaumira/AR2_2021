@@ -2,7 +2,7 @@
 
 //Constructors
 Ranking::Ranking() {
-
+	Renderer::GetInstance()->LoadFont(Font(F_GAMEOVER, F_GAMEOVER_P, 80));
 	// Carga BG
 	Renderer::GetInstance()->LoadRect(T_BG, Rect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT));
 
@@ -18,8 +18,8 @@ Ranking::Ranking() {
 	Load();
 }
 
-Ranking::Ranking(int _score) {
-
+Ranking::Ranking(int _score, Inputs* inputs) {
+	Renderer::GetInstance()->LoadFont(Font(F_GAMEOVER, F_GAMEOVER_P, 80));
 	// Carga BG
 	Renderer::GetInstance()->LoadRect(T_BG, Rect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT));
 
@@ -32,6 +32,8 @@ Ranking::Ranking(int _score) {
 
 	Score = _score;
 	nameInput = true;
+
+	inputs->SetInputName(true);
 }
 
 // Guardem les dades registrades al fitxer binari extern
@@ -151,16 +153,28 @@ void Ranking::Update(Inputs* inputs)
 	if (nameInput) 
 	{
 
-		if (Renderer::GetInstance()->event.key.keysym.sym >= SDLK_a && Renderer::GetInstance()->event.key.keysym.sym <= SDLK_z && NameRecord.size() < 5 && !keypressedNames)
+		if (NameRecord.size() < 5 && !keypressedNames)
 		{
-			NameRecord.push_back(Renderer::GetInstance()->event.key.keysym.sym);//We add the pressed key
-			keypressedNames = true;
-			currentTime = 0;
-			Renderer::GetInstance()->event.key.keysym.sym = 32;
+			char tmp = *inputs->GetName();
+			if (tmp != '0')
+			{
+				NameRecord.push_back(tmp); //We add the pressed key
+				keypressedNames = true;
+				inputs->SetInputName(false);
+			}
+				
 		}
 
-		currentTime++;
-		if (currentTime > 50) { keypressedNames = false; }
+		if(keypressedNames)
+		{
+			currentTime++;
+			if (currentTime > 10) 
+			{ 
+				keypressedNames = false; 
+				inputs->SetInputName(true);
+				currentTime = 0;
+			}
+		}
 
 		if (*inputs->GetKey(InputKeys::BACKSPACE) && !NameRecord.empty()) 
 		{ //Delete last key enter
@@ -195,23 +209,25 @@ void Ranking::DrawRanking()
 	int numberRecord = 1;//Number record
 	int distance = 67;//Distance of records
 
+	Vec2 size;
+
 	if (list.size() > 0) {
 		for (listofPair::iterator it = list.begin(); it != list.end(); ++it) {
 			//We load the name
-			Renderer::GetInstance()->LoadTextureText(F_GAMEOVER, Text( "scrRanking", it->first,Color( 250,102,0,0 )));
+			size = Renderer::GetInstance()->LoadTextureText(F_GAMEOVER, Text( "scrRanking", it->first,Color( 250,102,0,0 )));
 
 			//We paint the name
-			Renderer::GetInstance()->LoadRect("scrRanking", Rect( SCREEN_WIDTH - 315 ,70 + numberRecord * distance,(Renderer::GetInstance()->GetTextureSize("scrRanking")).x, (Renderer::GetInstance()->GetTextureSize("scrRanking")).y ));
+			Renderer::GetInstance()->LoadRect("scrRanking", Rect(SCREEN_WIDTH - 315, 70 + numberRecord * distance, size));
 			Renderer::GetInstance()->PushImage("scrRanking", "scrRanking");
 
 			//We load the score
 			if(it->second > 0)
-				Renderer::GetInstance()->LoadTextureText(F_GAMEOVER , Text("scrRanking", std::to_string(it->second), Color(250, 102, 0, 0)));
+				size = Renderer::GetInstance()->LoadTextureText(F_GAMEOVER , Text("scrRanking", std::to_string(it->second), Color(250, 102, 0, 0)));
 			else
-				Renderer::GetInstance()->LoadTextureText(F_GAMEOVER, Text("scrRanking", "-", Color(250, 102, 0, 0)));
+				size = Renderer::GetInstance()->LoadTextureText(F_GAMEOVER, Text("scrRanking", "-", Color(250, 102, 0, 0)));
 
 			//Paint the score
-			Renderer::GetInstance()->LoadRect("scrRanking", Rect(SCREEN_WIDTH - 250,70 + numberRecord * distance,(Renderer::GetInstance()->GetTextureSize("scrRanking")).x, (Renderer::GetInstance()->GetTextureSize("scrRanking")).y ));
+			Renderer::GetInstance()->LoadRect("scrRanking", Rect(SCREEN_WIDTH - 250, 70 + numberRecord * distance, size));
 			Renderer::GetInstance()->PushImage("scrRanking", "scrRanking");
 			numberRecord++;
 		}
@@ -225,8 +241,8 @@ void Ranking::DrawName()
 	{
 
 		name += *it;
-		Renderer::GetInstance()->LoadTextureText(F_GAMEOVER, Text( "scrRanking", name,Color( 250,102,0,0 ) ));
-		Renderer::GetInstance()->LoadRect("scrRanking", Rect( 300,200,(Renderer::GetInstance()->GetTextureSize("scrRanking")).x, (Renderer::GetInstance()->GetTextureSize("scrRanking")).y ));
+		Vec2 size = Renderer::GetInstance()->LoadTextureText(F_GAMEOVER, Text("scrRanking", name, Color(250, 102, 0, 0)));
+		Renderer::GetInstance()->LoadRect("scrRanking", Rect(0, 0, size));
 		Renderer::GetInstance()->PushImage("scrRanking", "srcRanking");
 	}
 }

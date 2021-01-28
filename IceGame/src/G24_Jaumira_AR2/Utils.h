@@ -36,9 +36,6 @@ namespace Collision
 		Vec2 ob1 = Vec2(o1.x + o1.w / 2, o1.y + o1.h / 2);
 		Vec2 ob2 = Vec2(o2.x + o2.w / 2, o2.y + o2.h / 2);
 
-		float tmp1 = sqrt(pow(ob2.x - ob1.x, 2) + pow(ob2.y - ob1.y, 2));
-		float tmp2 = sqrt(pow(o1.w / 2 + o2.w / 2, 2) + pow(o1.h / 2 + o2.h / 2, 2));
-
 		return sqrt(pow(ob2.x - ob1.x, 2)) <= (o1.w + o2.w) * 0.5 && sqrt(pow(ob2.y - ob1.y, 2)) <= (o1.h + o2.h) * 0.5;
 	};
 }
