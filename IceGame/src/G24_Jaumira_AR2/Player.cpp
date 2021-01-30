@@ -30,16 +30,20 @@ void Player::Update(Inputs* inputs, Map* map, float dt)
 	switch (dir)
 	{
 	case Direction::UP:
-		dir = Direction::UP_STOP;
+		if (!direction[(int)InputKeys::UP])
+			dir = Direction::UP_STOP;
 		break;
 	case Direction::DOWN:
-		dir = Direction::DOWN_STOP;
+		if (!direction[(int)InputKeys::DOWN])
+			dir = Direction::DOWN_STOP;
 		break;
 	case Direction::LEFT:
-		dir = Direction::LEFT_STOP;
+		if (!direction[(int)InputKeys::LEFT])
+			dir = Direction::LEFT_STOP;
 		break;
 	case Direction::RIGHT:
-		dir = Direction::RIGHT_STOP;
+		if (!direction[(int)InputKeys::RIGHT])
+			dir = Direction::RIGHT_STOP;
 		break;
 	}
 

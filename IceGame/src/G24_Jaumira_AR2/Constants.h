@@ -28,6 +28,7 @@ const std::string T_ICE = "Ice";
 const std::string F_GAMEOVER = "GameOver_font";
 const std::string F_SAIYAN = "Saiyan_font";
 const std::string F_SAIYAN_TITLE = "Saiyan_font_title";
+const std::string F_SAIYAN_RANKING = "Saiyan_font_ranking";
 const std::string F_SAIYAN_P = "../../res/ttf/saiyan.ttf";
 const std::string F_GAMEOVER_P = "../../res/ttf/game_over.ttf";
 

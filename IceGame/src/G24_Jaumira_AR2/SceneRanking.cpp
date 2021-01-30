@@ -2,6 +2,7 @@
 
 //Constructors
 Ranking::Ranking() {
+
 	Renderer::GetInstance()->LoadFont(Font(F_GAMEOVER, F_GAMEOVER_P, 80));
 	// Carga BG
 	Renderer::GetInstance()->LoadRect(T_BG, Rect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT));
@@ -19,12 +20,19 @@ Ranking::Ranking() {
 }
 
 Ranking::Ranking(int _score, Inputs* inputs) {
-	Renderer::GetInstance()->LoadFont(Font(F_GAMEOVER, F_GAMEOVER_P, 80));
+
+	Renderer::GetInstance()->LoadFont(Font(F_GAMEOVER, F_GAMEOVER_P, 50));
 	// Carga BG
 	Renderer::GetInstance()->LoadRect(T_BG, Rect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT));
 
 	Renderer::GetInstance()->LoadTextureText(F_SAIYAN, Text( "txtInsert", "Insert Your Name",Color(255,255,255,229)));
 	Renderer::GetInstance()->LoadTextureText(F_GAMEOVER, Text( "spcSend", "Press Space To Send",Color(255,255,255,229) ));
+
+	//Crear Textos pantalla Input
+	Renderer::GetInstance()->LoadTextureText(F_SAIYAN, Text("txtPlayers", "Top Players", Color(0, 255, 255, 229))); //Text top Players
+	//Button Back
+	returnMenu.SetTextData(Vec2(SCREEN_WIDTH / 2, 540), F_SAIYAN_P, "Go Back", F_SAIYAN, BTTN_BACK_R, Color(255, 255, 255, 255));
+	returnMenu.SetTextData(Vec2(SCREEN_WIDTH / 2, 540), F_SAIYAN_P, "Go Back", F_SAIYAN, BTTN_BACK_R_H, Color(0, 200, 0, 255));
 
 	while (!NameRecord.empty()) {//We clean the name of the record
 		NameRecord.pop_back();
@@ -150,34 +158,26 @@ void Ranking::Update(Inputs* inputs)
 	returnMenu.ChangeState(*inputs->GetMousePosition());
 	if (returnMenu.Collision(*inputs->GetMousePosition()) && *inputs->GetMouseClicked()) state = SceneState::GOTOMENU;
 
-	if (nameInput) 
-	{
-
-		if (NameRecord.size() < 5 && !keypressedNames)
-		{
+	if (nameInput) {
+		if (NameRecord.size() < 5 && !keypressedNames) {
 			char tmp = *inputs->GetName();
-			if (tmp != '0')
-			{
+			if (tmp != '0') {
 				NameRecord.push_back(tmp); //We add the pressed key
 				keypressedNames = true;
 				inputs->SetInputName(false);
 			}
-				
 		}
 
-		if(keypressedNames)
-		{
+		if(keypressedNames) {
 			currentTime++;
-			if (currentTime > 10) 
-			{ 
+			if (currentTime > 10) { 
 				keypressedNames = false; 
 				inputs->SetInputName(true);
 				currentTime = 0;
 			}
 		}
 
-		if (*inputs->GetKey(InputKeys::BACKSPACE) && !NameRecord.empty()) 
-		{ //Delete last key enter
+		if (*inputs->GetKey(InputKeys::BACKSPACE) && !NameRecord.empty())  { //Delete last key enter
 			NameRecord.pop_back();
 		}
 
@@ -195,10 +195,6 @@ void Ranking::Update(Inputs* inputs)
 				Save(Score, name);
 				nameInput = false;
 
-
-				state = SceneState::GOTORANKING;
-				// Scene::StateScene = SceneState::GOTO;
-				// Scene::gameScene = GameState::RANKING;
 			}
 		}
 	}
@@ -217,7 +213,7 @@ void Ranking::DrawRanking()
 			size = Renderer::GetInstance()->LoadTextureText(F_GAMEOVER, Text( "scrRanking", it->first,Color( 250,102,0,0 )));
 
 			//We paint the name
-			Renderer::GetInstance()->LoadRect("scrRanking", Rect(SCREEN_WIDTH - 315, 70 + numberRecord * distance, size));
+			Renderer::GetInstance()->LoadRect("scrRanking", Rect(SCREEN_WIDTH - 350, 70 + numberRecord * distance, size));
 			Renderer::GetInstance()->PushImage("scrRanking", "scrRanking");
 
 			//We load the score
@@ -227,24 +223,22 @@ void Ranking::DrawRanking()
 				size = Renderer::GetInstance()->LoadTextureText(F_GAMEOVER, Text("scrRanking", "-", Color(250, 102, 0, 0)));
 
 			//Paint the score
-			Renderer::GetInstance()->LoadRect("scrRanking", Rect(SCREEN_WIDTH - 250, 70 + numberRecord * distance, size));
+			Renderer::GetInstance()->LoadRect("scrRanking", Rect(SCREEN_WIDTH /2 +50, 70 + numberRecord * distance, size));
 			Renderer::GetInstance()->PushImage("scrRanking", "scrRanking");
 			numberRecord++;
 		}
 	}
 }
 
-void Ranking::DrawName() 
-{
-	name = "";
-	for (std::list<char>::iterator it = NameRecord.begin(); it != NameRecord.end(); ++it)
-	{
-
+void Ranking::DrawName() {
+	name = " ";
+	for (std::list<char>::iterator it = NameRecord.begin(); it != NameRecord.end(); ++it) {
 		name += *it;
-		Vec2 size = Renderer::GetInstance()->LoadTextureText(F_GAMEOVER, Text("scrRanking", name, Color(250, 102, 0, 0)));
-		Renderer::GetInstance()->LoadRect("scrRanking", Rect(0, 0, size));
-		Renderer::GetInstance()->PushImage("scrRanking", "srcRanking");
 	}
+	if (name.size() > 1) name.erase(name.begin());
+	Vec2 size = Renderer::GetInstance()->LoadTextureText(F_SAIYAN, Text("scrRanking", name, Color(250, 102, 0, 0)));
+	Renderer::GetInstance()->LoadRect("scrRanking", Rect(SCREEN_WIDTH - 263, SCREEN_HEIGHT/2 -10, size));
+	Renderer::GetInstance()->PushImage("scrRanking", "scrRanking");
 }
 
 void Ranking::Draw() 
@@ -254,28 +248,29 @@ void Ranking::Draw()
 
 	Renderer::GetInstance()->PushImage(T_BG, T_BG);
 
-	if (!nameInput)
-	{
+	if (!nameInput) {
 
 		DrawRanking();
 
 		// Text Players
-		Renderer::GetInstance()->LoadRect("txtPlayers", Rect( SCREEN_WIDTH - 340,60,(Renderer::GetInstance()->GetTextureSize("txtPlayers")).x, (Renderer::GetInstance()->GetTextureSize("txtPlayers")).y ));
+		Vec2 tempSize = Renderer::GetInstance()->GetTextureSize("txtPlayers");
+
+		Renderer::GetInstance()->LoadRect("txtPlayers", Rect( SCREEN_WIDTH - 340,60,tempSize.x, tempSize.y ));
 		Renderer::GetInstance()->PushImage("txtPlayers", "txtPlayers");
 
 		returnMenu.Draw();
 	}
 
-	else
-	{
+	else {
 
-		Renderer::GetInstance()->LoadRect("txtInsert", Rect( 80,60,(Renderer::GetInstance()->GetTextureSize("txtInsert")).x, (Renderer::GetInstance()->GetTextureSize("txtInsert")).y ));
-		Renderer::GetInstance()->LoadRect("spcSend", Rect( 200,360,(Renderer::GetInstance()->GetTextureSize("spcSend")).x, (Renderer::GetInstance()->GetTextureSize("spcSend")).y ));
+		Renderer::GetInstance()->LoadRect("txtInsert", Rect( SCREEN_WIDTH/2 -190,60,(Renderer::GetInstance()->GetTextureSize("txtInsert")).x, (Renderer::GetInstance()->GetTextureSize("txtInsert")).y ));
+		Renderer::GetInstance()->LoadRect("spcSend", Rect( SCREEN_WIDTH/2 - 90 ,SCREEN_HEIGHT -100,(Renderer::GetInstance()->GetTextureSize("spcSend")).x, (Renderer::GetInstance()->GetTextureSize("spcSend")).y ));
 
 		Renderer::GetInstance()->PushImage("txtInsert", "txtInsert");
 		Renderer::GetInstance()->PushImage("spcSend", "spcSend");
 
 		DrawName();
+
 	}
 
 	Renderer::GetInstance()->Render();
